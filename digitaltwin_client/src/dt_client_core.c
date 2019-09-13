@@ -731,6 +731,9 @@ static void RegisterDTInterfaces_Callback(IOTHUB_CLIENT_CONFIRMATION_RESULT resu
             
             if (dtReportedInterfacesStatus == DIGITALTWIN_CLIENT_OK)
             {
+                // Report our SDK Information at this point.  Do NOT wait for an ACK as this is best effort only.
+                SendSdkInformation(dtClientCore);
+
                 // Only after we've registered our interfaces should we start listening for incoming commands and properties.
                 // If either of these fail, we will report an error to the application.
                 DigitalTwinLogInfo("DigitalTwin Client Core: Interfaces successfully registered.  Register for device method and twin callbacks if needed");
@@ -744,10 +747,6 @@ static void RegisterDTInterfaces_Callback(IOTHUB_CLIENT_CONFIRMATION_RESULT resu
                 {
                     LogError("Cannot bind to device twin callbacks");
                     dtReportedInterfacesStatus = DIGITALTWIN_CLIENT_ERROR;
-                }
-                else
-                {   
-                    SendSdkInformation(dtClientCore);
                 }
             }
 

@@ -803,11 +803,10 @@ static void set_expected_calls_for_SendSdkInformation()
 static void set_expected_calls_for_properties_reported_callback()
 {
     set_expected_calls_for_BeginClientCoreCallbackProcessing();
+    set_expected_calls_for_SendSdkInformation();
 
     STRICT_EXPECTED_CALL(testBindingDTDeviceSetMethodCallback(IGNORED_PTR_ARG, IGNORED_PTR_ARG, IGNORED_PTR_ARG));
     STRICT_EXPECTED_CALL(testBindingDTDeviceSetTwinCallback(IGNORED_PTR_ARG, IGNORED_PTR_ARG, IGNORED_NUM_ARG));
-
-    set_expected_calls_for_SendSdkInformation();
 
     STRICT_EXPECTED_CALL(DT_InterfaceList_RegistrationCompleteCallback(IGNORED_PTR_ARG, (DIGITALTWIN_CLIENT_RESULT)IGNORED_NUM_ARG));
     STRICT_EXPECTED_CALL(testInterfaceRegisteredCallback(DIGITALTWIN_CLIENT_OK, testDTRegisterInterfacesAsyncContext));
