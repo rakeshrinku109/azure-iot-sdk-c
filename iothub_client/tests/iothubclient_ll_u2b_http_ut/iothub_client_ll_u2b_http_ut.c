@@ -674,14 +674,18 @@ static void setup_initiate_multiple_blob_upload_mocks(bool use_proxy, bool use_c
 
     setup_close_http_client();
 
+    STRICT_EXPECTED_CALL(BUFFER_new());
     STRICT_EXPECTED_CALL(STRING_c_str(IGNORED_PTR_ARG)).CallCannotFail();
+
     STRICT_EXPECTED_CALL(Blob_UploadMultipleBlocksFromSasUri(IGNORED_PTR_ARG, IGNORED_PTR_ARG, IGNORED_PTR_ARG, IGNORED_PTR_ARG, IGNORED_PTR_ARG, IGNORED_PTR_ARG, IGNORED_PTR_ARG));
     STRICT_EXPECTED_CALL(BUFFER_u_char(IGNORED_PTR_ARG)).CallCannotFail();
+    STRICT_EXPECTED_CALL(BUFFER_length(IGNORED_PTR_ARG)).CallCannotFail();
 
     // Upload step 3
     setup_step3_mocks(cred_type);
 
     STRICT_EXPECTED_CALL(STRING_delete(IGNORED_PTR_ARG));
+    STRICT_EXPECTED_CALL(BUFFER_delete(IGNORED_PTR_ARG));
     STRICT_EXPECTED_CALL(STRING_delete(IGNORED_PTR_ARG));
     STRICT_EXPECTED_CALL(STRING_delete(IGNORED_PTR_ARG));
     STRICT_EXPECTED_CALL(HTTPHeaders_Free(IGNORED_PTR_ARG));
